@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:rive/rive.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class AuthScreen extends StatefulWidget {
   const AuthScreen({super.key});
@@ -12,11 +13,16 @@ class AuthScreen extends StatefulWidget {
 
 class _AuthScreenState extends State<AuthScreen> {
   StateMachineController? controller;
-
   SMIInput<bool>? isChecking;
   SMIInput<bool>? isHandsUp;
   SMIInput<bool>? trigFailure;
   SMIInput<bool>? trigSuccess;
+
+  final _emailController = TextEditingController();
+  final _passwordController = TextEditingController();
+
+  String email = '';
+  String password = '';
 
   @override
   Widget build(BuildContext context) {
@@ -53,6 +59,7 @@ class _AuthScreenState extends State<AuthScreen> {
                 Column(
                   children: [
                     TextFormField(
+                      controller: _emailController,
                       keyboardType: TextInputType.emailAddress,
                       cursorColor: const Color.fromARGB(205, 89, 88, 90),
                       style: const TextStyle(fontWeight: FontWeight.normal),
@@ -84,6 +91,7 @@ class _AuthScreenState extends State<AuthScreen> {
                     ),
                     const SizedBox(height: 10),
                     TextFormField(
+                      controller: _passwordController,
                       obscureText: true,
                       cursorColor: const Color.fromARGB(205, 89, 88, 90),
                       style: const TextStyle(fontWeight: FontWeight.normal),
@@ -123,57 +131,44 @@ class _AuthScreenState extends State<AuthScreen> {
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(12)),
                       onPressed: () {
-                        // Login code
+                        FirebaseAuth.instance.signInWithEmailAndPassword(
+                            email: email, password: password);
                       },
                       child: const Text(
                         "Login",
-                        style: TextStyle(color: Colors.white),
+                        style: TextStyle(color: Colors.white, fontSize: 18),
                       ),
                     ),
-                    const SizedBox(height: 10),
-                    RegisterButton(size: size)
+                    SizedBox(
+                      width: size.width,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          const Text(
+                            "Don't you have an account?",
+                            style: TextStyle(
+                                color: Color.fromARGB(205, 89, 88, 90)),
+                          ),
+                          TextButton(
+                            onPressed: () {
+                              //register code
+                            },
+                            child: const Text(
+                              "Register",
+                              style: TextStyle(
+                                  color: Color.fromARGB(255, 42, 42, 42),
+                                  fontWeight: FontWeight.w500),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
                   ],
                 ),
               ],
             ),
           ),
         ),
-      ),
-    );
-  }
-}
-
-class RegisterButton extends StatelessWidget {
-  const RegisterButton({
-    super.key,
-    required this.size,
-  });
-
-  final Size size;
-
-  @override
-  Widget build(BuildContext context) {
-    return SizedBox(
-      width: size.width,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          const Text(
-            "Don't you have an account?",
-            style: TextStyle(color: Color.fromARGB(205, 89, 88, 90)),
-          ),
-          TextButton(
-            onPressed: () {
-              // signup code
-            },
-            child: const Text(
-              "Register",
-              style: TextStyle(
-                  color: Color.fromARGB(255, 42, 42, 42),
-                  fontWeight: FontWeight.w500),
-            ),
-          ),
-        ],
       ),
     );
   }

@@ -1,3 +1,5 @@
+import 'package:chat_app/screens/registration_screen.dart';
+
 import '../screens/auth_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -39,7 +41,7 @@ class ChatApp extends StatelessWidget {
           ),
         ),
       ),
-      home: const AuthScreen(),
+      home: RegisterScreen(),
     );
   }
 }
