@@ -39,7 +39,7 @@ class ChatApp extends StatelessWidget {
           ),
         ),
       ),
-      home: AuthScreen(),
+      home: const AuthScreen(),
     );
   }
 }

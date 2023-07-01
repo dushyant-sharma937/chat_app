@@ -2,7 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:rive/rive.dart';
 
 class AuthForm extends StatefulWidget {
-  const AuthForm({super.key, required this.submitFn});
+  const AuthForm({
+    super.key,
+    required this.submitFn,
+    required this.isLoading,
+  });
+  final bool isLoading;
   final void Function(
     String email,
     String password,
@@ -229,50 +234,53 @@ class _AuthFormState extends State<AuthForm> {
                       ),
                     ),
                     const SizedBox(height: 10),
-                    MaterialButton(
-                      onPressed: _trySubmit,
-                      minWidth: size.width,
-                      height: 50,
-                      color: Colors.purple,
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(12)),
-                      child: Text(
-                        _isLogin ? "Log in" : "Register",
-                        style:
-                            const TextStyle(color: Colors.white, fontSize: 18),
+                    if (widget.isLoading) const CircularProgressIndicator(),
+                    if (!widget.isLoading)
+                      MaterialButton(
+                        onPressed: _trySubmit,
+                        minWidth: size.width,
+                        height: 50,
+                        color: Colors.purple,
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(12)),
+                        child: Text(
+                          _isLogin ? "Log in" : "Register",
+                          style: const TextStyle(
+                              color: Colors.white, fontSize: 18),
+                        ),
                       ),
-                    ),
                     // const SizedBox(height: 10),
-                    SizedBox(
-                      width: size.width,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            _isLogin
-                                ? "Don't you have an account?"
-                                : "Already have an account?",
-                            style: const TextStyle(
-                                color: Color.fromARGB(205, 89, 88, 90)),
-                          ),
-                          TextButton(
-                            onPressed: () {
-                              setState(() {
-                                _isLogin = !_isLogin;
-                              });
-                            },
-                            child: Text(
-                              _isLogin ? "Register here" : "Log in here",
+                    if (!widget.isLoading)
+                      SizedBox(
+                        width: size.width,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              _isLogin
+                                  ? "Don't you have an account?"
+                                  : "Already have an account?",
                               style: const TextStyle(
-                                color: Color.fromARGB(255, 42, 42, 42),
-                                fontWeight: FontWeight.w500,
-                                decoration: TextDecoration.underline,
+                                  color: Color.fromARGB(205, 89, 88, 90)),
+                            ),
+                            TextButton(
+                              onPressed: () {
+                                setState(() {
+                                  _isLogin = !_isLogin;
+                                });
+                              },
+                              child: Text(
+                                _isLogin ? "Register here" : "Log in here",
+                                style: const TextStyle(
+                                  color: Color.fromARGB(255, 42, 42, 42),
+                                  fontWeight: FontWeight.w500,
+                                  decoration: TextDecoration.underline,
+                                ),
                               ),
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
-                    ),
                   ],
                 ),
               ),
