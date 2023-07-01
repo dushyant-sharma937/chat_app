@@ -107,7 +107,7 @@ class _AuthFormState extends State<AuthForm> {
                         _userEmail = value!;
                       },
                       keyboardType: TextInputType.emailAddress,
-                      cursorColor: const Color.fromARGB(205, 89, 88, 90),
+                      cursorColor: const Color.fromARGB(205, 0, 0, 0),
                       style: const TextStyle(fontWeight: FontWeight.w500),
                       decoration: InputDecoration(
                         hintText: 'Email address',
@@ -115,14 +115,14 @@ class _AuthFormState extends State<AuthForm> {
                           color: Color.fromARGB(205, 89, 88, 90),
                           fontWeight: FontWeight.bold,
                         ),
-                        hoverColor: const Color.fromARGB(205, 89, 88, 90),
-                        focusColor: const Color.fromARGB(205, 89, 88, 90),
+                        hoverColor: const Color.fromARGB(205, 0, 0, 0),
+                        focusColor: const Color.fromARGB(205, 0, 0, 0),
                         prefixIcon: const Icon(Icons.mail),
                         prefixIconColor: const Color.fromARGB(205, 89, 88, 90),
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(12),
                           borderSide: const BorderSide(
-                            color: Color.fromARGB(205, 89, 88, 90),
+                            color: Color.fromARGB(205, 0, 0, 0),
                           ),
                         ),
                       ),
@@ -149,7 +149,7 @@ class _AuthFormState extends State<AuthForm> {
                         onSaved: (value) {
                           _userName = value!;
                         },
-                        cursorColor: const Color.fromARGB(205, 89, 88, 90),
+                        cursorColor: const Color.fromARGB(205, 0, 0, 0),
                         style: const TextStyle(fontWeight: FontWeight.w500),
                         decoration: InputDecoration(
                           hintText: 'Username',
@@ -157,15 +157,15 @@ class _AuthFormState extends State<AuthForm> {
                             color: Color.fromARGB(205, 89, 88, 90),
                             fontWeight: FontWeight.bold,
                           ),
-                          hoverColor: const Color.fromARGB(205, 89, 88, 90),
-                          focusColor: const Color.fromARGB(205, 89, 88, 90),
+                          hoverColor: const Color.fromARGB(205, 0, 0, 0),
+                          focusColor: const Color.fromARGB(205, 0, 0, 0),
                           prefixIcon: const Icon(Icons.person),
                           prefixIconColor:
                               const Color.fromARGB(205, 89, 88, 90),
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(12),
                             borderSide: const BorderSide(
-                              color: Color.fromARGB(205, 89, 88, 90),
+                              color: Color.fromARGB(205, 0, 0, 0),
                             ),
                           ),
                         ),
@@ -191,7 +191,7 @@ class _AuthFormState extends State<AuthForm> {
                       onSaved: (value) {
                         _userPassword = value!;
                       },
-                      cursorColor: const Color.fromARGB(205, 89, 88, 90),
+                      cursorColor: const Color.fromARGB(205, 0, 0, 0),
                       style: const TextStyle(fontWeight: FontWeight.w500),
                       obscureText: true,
                       decoration: InputDecoration(
@@ -200,14 +200,14 @@ class _AuthFormState extends State<AuthForm> {
                           color: Color.fromARGB(205, 89, 88, 90),
                           fontWeight: FontWeight.bold,
                         ),
-                        hoverColor: const Color.fromARGB(205, 89, 88, 90),
-                        focusColor: const Color.fromARGB(205, 89, 88, 90),
+                        hoverColor: const Color.fromARGB(205, 0, 0, 0),
+                        focusColor: const Color.fromARGB(205, 0, 0, 0),
                         prefixIcon: const Icon(Icons.lock),
                         prefixIconColor: const Color.fromARGB(205, 89, 88, 90),
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(12),
                           borderSide: const BorderSide(
-                            color: Color.fromARGB(205, 89, 88, 90),
+                            color: Color.fromARGB(205, 0, 0, 0),
                           ),
                         ),
                       ),
@@ -220,19 +220,20 @@ class _AuthFormState extends State<AuthForm> {
                         isHandsUp!.change(true);
                       },
                     ),
-                    const SizedBox(height: 10),
-                    SizedBox(
-                      width: size.width,
-                      child: const Text(
-                        "Forgot your Password?",
-                        textAlign: TextAlign.right,
-                        style: TextStyle(
-                          decoration: TextDecoration.underline,
-                          color: Color.fromARGB(205, 46, 46, 47),
-                          fontWeight: FontWeight.bold,
+                    if (_isLogin) const SizedBox(height: 10),
+                    if (_isLogin)
+                      SizedBox(
+                        width: size.width,
+                        child: const Text(
+                          "Forgot your Password?",
+                          textAlign: TextAlign.right,
+                          style: TextStyle(
+                            decoration: TextDecoration.underline,
+                            color: Color.fromARGB(205, 0, 0, 0),
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
                       ),
-                    ),
                     const SizedBox(height: 10),
                     if (widget.isLoading) const CircularProgressIndicator(),
                     if (!widget.isLoading)
@@ -261,7 +262,7 @@ class _AuthFormState extends State<AuthForm> {
                                   ? "Don't you have an account?"
                                   : "Already have an account?",
                               style: const TextStyle(
-                                  color: Color.fromARGB(205, 89, 88, 90)),
+                                  color: Color.fromARGB(205, 0, 0, 0)),
                             ),
                             TextButton(
                               onPressed: () {
@@ -272,7 +273,7 @@ class _AuthFormState extends State<AuthForm> {
                               child: Text(
                                 _isLogin ? "Register here" : "Log in here",
                                 style: const TextStyle(
-                                  color: Color.fromARGB(255, 42, 42, 42),
+                                  color: Color.fromARGB(255, 0, 0, 0),
                                   fontWeight: FontWeight.w500,
                                   decoration: TextDecoration.underline,
                                 ),

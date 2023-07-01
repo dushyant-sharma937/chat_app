@@ -64,9 +64,11 @@ class _AuthScreenNewState extends State<AuthScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Theme.of(context).colorScheme.onPrimary,
-      body: AuthForm(submitFn: _submitAuthForm, isLoading: _isLoading),
+    return SafeArea(
+      child: Scaffold(
+        backgroundColor: Theme.of(context).colorScheme.onPrimary,
+        body: AuthForm(submitFn: _submitAuthForm, isLoading: _isLoading),
+      ),
     );
   }
 }
