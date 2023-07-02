@@ -3,7 +3,12 @@ import 'package:flutter/material.dart';
 class MessageBubble extends StatelessWidget {
   final String message;
   final bool isMe;
-  const MessageBubble({super.key, required this.message, required this.isMe});
+  final String username;
+  const MessageBubble(
+      {super.key,
+      required this.message,
+      required this.isMe,
+      required this.username});
 
   @override
   Widget build(BuildContext context) {
@@ -14,23 +19,48 @@ class MessageBubble extends StatelessWidget {
         Container(
           decoration: BoxDecoration(
             color: isMe
-                ? Color.fromARGB(200, 145, 144, 144)
-                : Color.fromARGB(212, 176, 176, 255),
+                ? const Color.fromARGB(200, 145, 144, 144)
+                : Color.fromARGB(211, 19, 19, 89),
             borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(12),
-              topRight: Radius.circular(12),
-              bottomLeft: !isMe ? Radius.circular(0) : Radius.circular(12),
-              bottomRight: isMe ? Radius.circular(0) : Radius.circular(12),
+              bottomLeft:
+                  !isMe ? const Radius.circular(18) : const Radius.circular(12),
+              bottomRight:
+                  isMe ? const Radius.circular(18) : const Radius.circular(12),
+              topLeft:
+                  !isMe ? const Radius.circular(0) : const Radius.circular(18),
+              topRight:
+                  isMe ? const Radius.circular(0) : const Radius.circular(18),
             ),
           ),
-          width: size.width * 0.3,
-          padding: EdgeInsets.symmetric(vertical: 10, horizontal: 16),
-          margin: EdgeInsets.symmetric(vertical: 4, horizontal: 8),
-          child: Text(
-            message,
-            style: TextStyle(
-              color: Colors.black,
-            ),
+          // width: size.width * 0.3,
+          padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 10),
+          margin: EdgeInsets.only(
+            top: 4,
+            bottom: 4,
+            right: isMe ? 8 : 18,
+            left: !isMe ? 8 : 18,
+          ),
+          child: Column(
+            crossAxisAlignment:
+                isMe ? CrossAxisAlignment.end : CrossAxisAlignment.start,
+            children: [
+              if (!isMe)
+                Text(
+                  '~ $username',
+                  style: TextStyle(
+                    fontSize: 12,
+                    fontWeight: FontWeight.bold,
+                    color: isMe ? Colors.black : Colors.green.shade300,
+                  ),
+                  // textAlign: TextAlign.start,
+                ),
+              Text(
+                message,
+                style: TextStyle(
+                  color: isMe ? Colors.black : Colors.white,
+                ),
+              ),
+            ],
           ),
         ),
       ],
