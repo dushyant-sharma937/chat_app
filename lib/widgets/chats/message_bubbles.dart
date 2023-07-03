@@ -12,15 +12,15 @@ class MessageBubble extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var size = MediaQuery.of(context).size;
     return Row(
       mainAxisAlignment: isMe ? MainAxisAlignment.end : MainAxisAlignment.start,
       children: [
         Container(
+          width: MediaQuery.of(context).size.width * 0.6,
           decoration: BoxDecoration(
             color: isMe
-                ? const Color.fromARGB(200, 145, 144, 144)
-                : Color.fromARGB(211, 19, 19, 89),
+                ? Theme.of(context).colorScheme.onPrimaryContainer
+                : Theme.of(context).colorScheme.onSecondaryContainer,
             borderRadius: BorderRadius.only(
               bottomLeft:
                   !isMe ? const Radius.circular(18) : const Radius.circular(12),
@@ -47,17 +47,18 @@ class MessageBubble extends StatelessWidget {
               if (!isMe)
                 Text(
                   '~ $username',
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 12,
                     fontWeight: FontWeight.bold,
-                    color: isMe ? Colors.black : Colors.green.shade300,
+                    color: Colors.deepOrange,
                   ),
                   // textAlign: TextAlign.start,
                 ),
               Text(
                 message,
-                style: TextStyle(
-                  color: isMe ? Colors.black : Colors.white,
+                style: const TextStyle(
+                  color: Colors.black,
+                  fontSize: 16,
                 ),
               ),
             ],

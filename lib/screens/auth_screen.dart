@@ -1,3 +1,5 @@
+import 'dart:io';
+import 'package:firebase_storage/firebase_storage.dart';
 import '../widgets/auth/auth_form.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -18,26 +20,39 @@ class _AuthScreenNewState extends State<AuthScreen> {
     String email,
     String password,
     String username,
+    File image,
     bool isLogin,
     BuildContext ctx,
   ) async {
     UserCredential authResult;
     try {
-      setState(() {
-        _isLoading = true;
-      });
+      if (mounted)
+        setState(() {
+          _isLoading = true;
+        });
       if (isLogin) {
         authResult = await _auth.signInWithEmailAndPassword(
             email: email, password: password);
       } else {
         authResult = await _auth.createUserWithEmailAndPassword(
             email: email, password: password);
+
+        final ref = FirebaseStorage.instance
+            .ref()
+            .child('chat_app_storage')
+            .child('user_images')
+            .child('${authResult.user!.uid}.jpg');
+        await ref.putFile(image);
+
+        final url = await ref.getDownloadURL();
+
         await FirebaseFirestore.instance
             .collection('users')
             .doc(authResult.user!.uid)
             .set({
           'username': username,
           'email': email,
+          'imageUrl': url,
         });
       }
     } on FirebaseAuthException catch (err) {
@@ -51,9 +66,10 @@ class _AuthScreenNewState extends State<AuthScreen> {
           backgroundColor: Theme.of(context).colorScheme.error,
         ),
       );
-      setState(() {
-        _isLoading = false;
-      });
+      if (mounted)
+        setState(() {
+          _isLoading = false;
+        });
     } catch (err) {
       print("here is the error: $err");
       setState(() {

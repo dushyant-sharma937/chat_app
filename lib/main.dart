@@ -22,8 +22,18 @@ class ChatApp extends StatelessWidget {
         primaryColor: const Color(0xffD6E2EA),
         colorScheme: const ColorScheme.light(
           brightness: Brightness.light,
-          onPrimary: Color(0xffD6E2EA),
-          onSecondary: Colors.purple,
+          onPrimary: Color(0xFFD6E2EA),
+          // onSecondary: Color(0xFF32897D),
+          onSecondary: Color(0xFF00A2F0),
+          onPrimaryContainer: Color.fromARGB(255, 133, 179, 184),
+          onSecondaryContainer: Color(0xFFA7C9DE),
+          // onSecondary: Colors.purple,
+        ),
+        buttonTheme: const ButtonThemeData(
+          colorScheme: ColorScheme.dark(
+            brightness: Brightness.dark,
+            onPrimary: Color(0xFF00A2F0),
+          ),
         ),
         textTheme: const TextTheme(
           titleMedium: TextStyle(

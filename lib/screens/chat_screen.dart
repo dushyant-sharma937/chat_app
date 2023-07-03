@@ -47,13 +47,11 @@ class ChatScreen extends StatelessWidget {
           ],
         ),
         backgroundColor: Theme.of(context).colorScheme.onPrimary,
-        body: Container(
-          child: const Column(
-            children: [
-              Expanded(child: Messages()),
-              NewMessage(),
-            ],
-          ),
+        body: const Column(
+          children: [
+            Expanded(child: Messages()),
+            NewMessage(),
+          ],
         ),
       ),
     );
